@@ -1,0 +1,85 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.card {
+  width: min(560px, 100%);
+  background: linear-gradient(180deg, var(--surface) 0%, #f4eddf 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 22px 60px rgba(82, 50, 29, 0.12);
+  display: grid;
+  gap: 1rem;
+}
+
+.card h1 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.card h2 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.block {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.6rem;
+  background: #fff;
+}
+
+.separator {
+  height: 1px;
+  background: var(--border);
+}
+
+.primary,
+.secondary {
+  border: 0;
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.secondary {
+  background: var(--surface-2);
+  color: #201f1b;
+}
+
+.card input {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  background: #fffef9;
+}
+
+.qrCode {
+  width: 240px;
+  max-width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.warning {
+  color: #8d4f00;
+}
+
+.status {
+  color: #304f25;
+}
+
+.error {
+  color: #8f1a1a;
+}
