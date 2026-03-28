@@ -89,6 +89,7 @@ export function PlayerFooter({
                 alt="Now playing"
                 width={48}
                 height={48}
+                unoptimized={Boolean(currentSong?.cover_path)}
               />
             </div>
             <div className="min-w-0">

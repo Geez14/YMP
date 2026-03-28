@@ -23,6 +23,7 @@ export function NowPlayingPanel({ song, textSecondary, textPrimary, accentText, 
               alt="Album art"
               width={380}
               height={380}
+              unoptimized={Boolean(song?.cover_path)}
               className="h-full w-full object-cover"
             />
           </div>

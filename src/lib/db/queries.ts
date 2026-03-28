@@ -386,6 +386,23 @@ export async function clearSongRetention(songId: string): Promise<void> {
   }
 }
 
+export async function clearSongCover(songId: string): Promise<void> {
+  const { error } = await supabaseServiceClient
+    .from("songs")
+    .update({
+      cover_path: null,
+      cover_mime_type: null,
+    })
+    .eq("id", songId);
+
+  if (error) {
+    if (isMissingTableError(error.message)) {
+      return;
+    }
+    throw new Error(`Failed to clear song cover: ${error.message}`);
+  }
+}
+
 async function getRemovableSongIdSet(songIds: string[]): Promise<Set<string>> {
   if (songIds.length === 0) {
     return new Set<string>();

@@ -580,6 +580,7 @@ export function MusicDashboard({ initialSongs, role, uploadLimit }: MusicDashboa
                         alt={song.title}
                         width={320}
                         height={320}
+                        unoptimized={Boolean(song.cover_path)}
                         className="aspect-square w-full object-cover"
                       />
                     </div>
@@ -607,7 +608,14 @@ export function MusicDashboard({ initialSongs, role, uploadLimit }: MusicDashboa
                     onClick={() => setSelectedSongId(song.id)}
                   >
                     <div className="relative h-16 w-16 overflow-hidden rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.12)]">
-                      <Image src={cover} alt={song.title} width={80} height={80} className="h-full w-full object-cover" />
+                      <Image
+                        src={cover}
+                        alt={song.title}
+                        width={80}
+                        height={80}
+                        unoptimized={Boolean(song.cover_path)}
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-semibold" title={song.title}>

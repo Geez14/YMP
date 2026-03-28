@@ -247,7 +247,7 @@ export async function POST(request: Request) {
       if (song) {
         await ensureSongAccess(user.id, song.id);
         await clearSongRetention(song.id);
-        await supabaseServiceClient.storage.from("music").remove([objectPath]);
+        await supabaseServiceClient.storage.from(MUSIC_BUCKET).remove([objectPath]);
         return NextResponse.json({ song, deduplicated: true }, { status: 200 });
       }
     }

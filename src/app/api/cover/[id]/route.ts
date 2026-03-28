@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { getProfileByUserId, getSongByIdForUser } from "@/lib/db/queries";
+import { clearSongCover, getProfileByUserId, getSongByIdForUser } from "@/lib/db/queries";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { supabaseServiceClient } from "@/lib/supabase/service";
 
@@ -51,7 +51,12 @@ function detectImageMimeType(bytes: Uint8Array | Buffer): string | null {
 }
 
 function placeholderResponse() {
-  return new NextResponse(PLACEHOLDER_PNG, {
+  const placeholderArrayBuffer = PLACEHOLDER_PNG.buffer.slice(
+    PLACEHOLDER_PNG.byteOffset,
+    PLACEHOLDER_PNG.byteOffset + PLACEHOLDER_PNG.byteLength,
+  ) as ArrayBuffer;
+  const placeholderBlob = new Blob([placeholderArrayBuffer], { type: "image/png" });
+  return new NextResponse(placeholderBlob, {
     status: 200,
     headers: {
       "Content-Type": "image/png",
@@ -59,6 +64,24 @@ function placeholderResponse() {
       "Cache-Control": "private, no-store",
       "Accept-Ranges": "bytes",
       "Content-Disposition": "inline; filename=cover-placeholder.png",
+    },
+  });
+}
+
+function imageResponse(imageBytes: Uint8Array, contentType: string, filename: string) {
+  const imageArrayBuffer = imageBytes.buffer.slice(
+    imageBytes.byteOffset,
+    imageBytes.byteOffset + imageBytes.byteLength,
+  ) as ArrayBuffer;
+  const imageBlob = new Blob([imageArrayBuffer], { type: contentType });
+  return new NextResponse(imageBlob, {
+    status: 200,
+    headers: {
+      "Content-Type": contentType,
+      "Content-Length": String(imageBytes.length),
+      "Cache-Control": "private, no-store",
+      "Accept-Ranges": "bytes",
+      "Content-Disposition": `inline; filename=\"${filename}\"`,
     },
   });
 }
@@ -78,7 +101,7 @@ export async function GET(_request: Request, context: Context) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    return placeholderResponse();
   }
 
   const profile = await getProfileByUserId(user.id);
@@ -86,7 +109,7 @@ export async function GET(_request: Request, context: Context) {
   const song = await getSongByIdForUser(id, user.id, role);
 
   if (!song) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return placeholderResponse();
   }
 
   if (!song.cover_path) {
@@ -98,15 +121,27 @@ export async function GET(_request: Request, context: Context) {
     .download(song.cover_path);
 
   if (downloadResult.error || !downloadResult.data) {
+    try {
+      await clearSongCover(song.id);
+    } catch {
+      // best effort cleanup only
+    }
     return placeholderResponse();
   }
 
   const blob = downloadResult.data;
 
-  // Probe a few bytes to ensure the stored object is actually an image; fall back to a safe placeholder if not.
-  const probeBuffer = Buffer.from(await blob.slice(0, 16).arrayBuffer());
+  const imageBuffer = Buffer.from(await blob.arrayBuffer());
+
+  // Validate image bytes; if invalid, clear cover metadata so UI no longer flags this song as having cover art.
+  const probeBuffer = imageBuffer.subarray(0, 16);
   const detectedMime = detectImageMimeType(probeBuffer);
   if (!detectedMime) {
+    try {
+      await clearSongCover(song.id);
+    } catch {
+      // best effort cleanup only
+    }
     return placeholderResponse();
   }
 
@@ -115,14 +150,5 @@ export async function GET(_request: Request, context: Context) {
       ? song.cover_mime_type
       : detectedMime;
 
-  return new NextResponse(blob.stream(), {
-    status: 200,
-    headers: {
-      "Content-Type": contentType,
-      "Content-Length": String(blob.size),
-      "Cache-Control": "private, no-store",
-      "Accept-Ranges": "bytes",
-      "Content-Disposition": `inline; filename="cover-${song.id}"`,
-    },
-  });
+  return imageResponse(new Uint8Array(imageBuffer), contentType, `cover-${song.id}`);
 }
