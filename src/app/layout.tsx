@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import { ServiceWorkerRegister } from "@/components/service-worker-register";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body className={`${manrope.variable} ${jakarta.variable} font-jakarta`}>
         {children}
         <ServiceWorkerRegister />
+        <SpeedInsights />
       </body>
     </html>
   );

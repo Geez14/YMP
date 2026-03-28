@@ -1,6 +1,5 @@
 import type { RefObject } from "react";
 import {
-  ChevronDown,
   Disc3,
   Library,
   LogOut,
@@ -164,18 +163,17 @@ export function TopNav({
             <Upload size={18} />
           </NyxIconButton>
           <div ref={profileWrapRef} className="relative">
-            <NyxIconButton
+            <button
               type="button"
               aria-label="Profile menu"
               title="Profile"
-              className="gap-2 rounded-full px-2 py-1"
+              className="grid h-10 w-10 place-items-center rounded-full"
               onClick={() => setIsProfileOpen(!isProfileOpen)}
             >
               <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-[#3652be] to-[#839aff] text-sm font-semibold text-white shadow-[0_10px_20px_rgba(54,82,190,0.3)]">
                 {avatarInitial}
               </span>
-              <ChevronDown size={14} />
-            </NyxIconButton>
+            </button>
             {isProfileOpen ? (
               <div className={`absolute right-0 mt-3 w-60 rounded-2xl p-3 text-sm shadow-[0_20px_40px_rgba(54,82,190,0.06)] backdrop-blur-[20px] ${menuSurface}`}>
                 <div className="grid gap-1">
