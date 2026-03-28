@@ -20,7 +20,9 @@ export const metadata: Metadata = {
   description: "Private OAuth music player",
   manifest: "/manifest.json",
   icons: {
-    apple: "/file.svg",
+    icon: "/ymp-icon.svg",
+    shortcut: "/ymp-icon.svg",
+    apple: "/ymp-icon.svg",
   },
 };
 

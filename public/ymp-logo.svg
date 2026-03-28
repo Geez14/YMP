@@ -1,0 +1,94 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">YMP Logo</title>
+  <desc id="desc">A glowing circular music emblem with waveform bars and YMP wordmark.</desc>
+
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1730"/>
+      <stop offset="100%" stop-color="#091126"/>
+    </linearGradient>
+
+    <linearGradient id="ringGrad" x1="70" y1="70" x2="250" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="45%" stop-color="#7C9BFF"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+
+    <linearGradient id="pulseGrad" x1="110" y1="120" x2="210" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ECFEFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#93C5FD" stop-opacity="0.65"/>
+    </linearGradient>
+
+    <linearGradient id="textGrad" x1="360" y1="60" x2="700" y2="250" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="45%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#C4B5FD"/>
+    </linearGradient>
+
+    <linearGradient id="accentGrad" x1="360" y1="230" x2="720" y2="230" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="0" y="0" width="340" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="16" result="effect1_foregroundBlur"/>
+    </filter>
+
+    <filter id="textGlow" x="325" y="35" width="500" height="240" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="3.5" result="effect1_foregroundBlur"/>
+    </filter>
+
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 160) rotate(90) scale(130)">
+      <stop stop-color="#60A5FA" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="0" y="0" width="960" height="320" rx="42" fill="url(#bgGrad)"/>
+
+  <g opacity="0.22">
+    <circle cx="160" cy="160" r="128" fill="url(#halo)"/>
+    <circle cx="760" cy="70" r="120" fill="#2E3D8A"/>
+    <circle cx="880" cy="250" r="160" fill="#1E2C63"/>
+  </g>
+
+  <g filter="url(#softGlow)">
+    <circle cx="160" cy="160" r="100" fill="#81A8FF" opacity="0.18"/>
+  </g>
+
+  <g>
+    <circle cx="160" cy="160" r="95" fill="#0A1228" stroke="url(#ringGrad)" stroke-width="10"/>
+    <circle cx="160" cy="160" r="78" fill="#0F1A35"/>
+
+    <g fill="url(#pulseGrad)">
+      <rect x="112" y="142" width="12" height="36" rx="6"/>
+      <rect x="130" y="126" width="12" height="68" rx="6"/>
+      <rect x="148" y="112" width="12" height="96" rx="6"/>
+      <rect x="166" y="132" width="12" height="56" rx="6"/>
+      <rect x="184" y="116" width="12" height="88" rx="6"/>
+      <rect x="202" y="138" width="12" height="44" rx="6"/>
+    </g>
+
+    <circle cx="160" cy="160" r="94" stroke="#A5B4FC" stroke-opacity="0.25" stroke-width="1.2"/>
+    <path d="M233 150C240 152 244 157 244 164C244 171 240 176 233 178" stroke="#BBD0FF" stroke-opacity="0.75" stroke-width="3" stroke-linecap="round"/>
+    <path d="M87 150C80 152 76 157 76 164C76 171 80 176 87 178" stroke="#BBD0FF" stroke-opacity="0.75" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <g filter="url(#textGlow)">
+    <text x="340" y="158" fill="url(#textGrad)" font-family="Manrope, Inter, Segoe UI, Arial, sans-serif" font-size="98" font-weight="800" letter-spacing="5">YMP</text>
+  </g>
+
+  <text x="344" y="210" fill="#CBD5E1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="27" font-weight="500" letter-spacing="1.6">Your Music, Anywhere</text>
+
+  <rect x="342" y="228" width="330" height="3" rx="1.5" fill="url(#accentGrad)" opacity="0.9"/>
+
+  <g opacity="0.7" fill="#A5B4FC">
+    <circle cx="705" cy="215" r="3"/>
+    <circle cx="724" cy="215" r="3"/>
+    <circle cx="743" cy="215" r="3"/>
+  </g>
+</svg>

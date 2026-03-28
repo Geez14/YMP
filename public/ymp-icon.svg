@@ -1,0 +1,57 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">YMP App Icon</title>
+  <desc id="desc">Circular neon music badge with waveform bars.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="64" y1="64" x2="448" y2="448" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0E1A36"/>
+      <stop offset="100%" stop-color="#091126"/>
+    </linearGradient>
+
+    <linearGradient id="ring" x1="106" y1="106" x2="406" y2="406" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="48%" stop-color="#7C9BFF"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+
+    <linearGradient id="bars" x1="185" y1="168" x2="328" y2="336" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ECFEFF"/>
+      <stop offset="100%" stop-color="#93C5FD"/>
+    </linearGradient>
+
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 256) rotate(90) scale(210)">
+      <stop stop-color="#60A5FA" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="glow" x="44" y="44" width="424" height="424" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="18" result="effect1_foregroundBlur"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="512" height="512" rx="128" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="182" fill="url(#halo)" opacity="0.35"/>
+
+  <g filter="url(#glow)">
+    <circle cx="256" cy="256" r="145" fill="#7EA2FF" opacity="0.17"/>
+  </g>
+
+  <circle cx="256" cy="256" r="145" fill="#0A1228" stroke="url(#ring)" stroke-width="16"/>
+  <circle cx="256" cy="256" r="117" fill="#0F1A35"/>
+
+  <g fill="url(#bars)">
+    <rect x="178" y="228" width="18" height="56" rx="9"/>
+    <rect x="204" y="202" width="18" height="108" rx="9"/>
+    <rect x="230" y="180" width="18" height="152" rx="9"/>
+    <rect x="256" y="210" width="18" height="92" rx="9"/>
+    <rect x="282" y="186" width="18" height="140" rx="9"/>
+    <rect x="308" y="222" width="18" height="64" rx="9"/>
+  </g>
+
+  <path d="M366 238C378 242 386 251 386 262C386 273 378 282 366 286" stroke="#C7D9FF" stroke-opacity="0.85" stroke-width="6" stroke-linecap="round"/>
+  <path d="M146 238C134 242 126 251 126 262C126 273 134 282 146 286" stroke="#C7D9FF" stroke-opacity="0.85" stroke-width="6" stroke-linecap="round"/>
+
+  <circle cx="256" cy="256" r="144" stroke="#A5B4FC" stroke-opacity="0.22" stroke-width="2"/>
+</svg>
