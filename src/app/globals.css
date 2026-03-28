@@ -1,11 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  --background: #f8f6ef;
-  --foreground: #171717;
-  --surface: #fffdf7;
-  --surface-2: #f1ebdd;
-  --accent: #ba3f1d;
-  --accent-2: #234d66;
-  --border: #d8cdb4;
+  --surface: #f4f6fb;
+  --surface-container-low: #eef1f6;
+  --surface-container-lowest: #ffffff;
+  --surface-container-highest: #d9dde4;
+  --primary: #3652be;
+  --primary-container: #839aff;
+  --on-surface: #2c2f33;
+  --on-surface-variant: #4a5165;
 }
 
 html,
@@ -15,14 +20,66 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background:
-    radial-gradient(circle at 20% 10%, #fff3ce 0, transparent 30%),
-    radial-gradient(circle at 80% 0%, #f1e3d8 0, transparent 24%),
-    linear-gradient(180deg, #f7f2e7 0%, #f6f4ed 100%);
-  font-family: var(--font-geist-sans), sans-serif;
+  color: var(--on-surface);
+  background: var(--surface);
+  font-family: var(--font-jakarta), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.font-manrope {
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.font-jakarta {
+  font-family: var(--font-jakarta), sans-serif;
+}
+
+.aetheric-search {
+  caret-color: var(--primary);
+}
+
+.aetheric-search:focus {
+  animation: aetheric-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes aetheric-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(54, 82, 190, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(54, 82, 190, 0.18);
+  }
+}
+
+.aetheric-wave-bar {
+  transform-origin: center;
+  animation: aetheric-wave 1.2s ease-in-out infinite;
+}
+
+.aetheric-wave-bar:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.aetheric-wave-bar:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.aetheric-wave-bar:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+@keyframes aetheric-wave {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 * {

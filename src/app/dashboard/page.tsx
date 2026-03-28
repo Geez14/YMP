@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { MusicDashboard } from "@/components/music-dashboard";
+import MusicDashboardClient from "@/components/music-dashboard-client";
 import { getProfileByUserId, listSongsForUser } from "@/lib/db/queries";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -18,7 +18,8 @@ export default async function DashboardPage() {
 
   const profile = await getProfileByUserId(user.id);
   const role = profile?.role ?? "standard";
+  const uploadLimit = profile?.upload_limit ?? null;
   const songs = await listSongsForUser(user.id, role);
 
-  return <MusicDashboard initialSongs={songs} role={role} />;
+  return <MusicDashboardClient initialSongs={songs} role={role} uploadLimit={uploadLimit} />;
 }

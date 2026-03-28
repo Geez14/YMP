@@ -1,20 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { ServiceWorkerRegister } from "@/components/service-worker-register";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
+
+const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "YMP";
 
 export const metadata: Metadata = {
-  title: "MyMusic",
+  title: appName,
   description: "Private OAuth music player",
+  manifest: "/manifest.json",
+  icons: {
+    apple: "/file.svg",
+  },
 };
 
 export default function RootLayout({
@@ -24,8 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${manrope.variable} ${jakarta.variable} font-jakarta`}>
         {children}
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
