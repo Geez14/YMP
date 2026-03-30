@@ -6,7 +6,7 @@ function cx(...classes: Array<string | undefined | null | false>) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function NyxContainer({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export function UiContainer({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cx("rounded-2xl p-4", className)}
@@ -15,7 +15,7 @@ export function NyxContainer({ className, ...props }: HTMLAttributes<HTMLDivElem
   );
 }
 
-export function NyxButton({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+export function UiButton({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       className={cx(
@@ -28,7 +28,7 @@ export function NyxButton({ className, ...props }: ButtonHTMLAttributes<HTMLButt
   );
 }
 
-export function NyxIconButton({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+export function UiIconButton({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       className={cx(
@@ -41,7 +41,7 @@ export function NyxIconButton({ className, ...props }: ButtonHTMLAttributes<HTML
   );
 }
 
-export function NyxSlider({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
+export function UiSlider({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       type="range"
@@ -51,12 +51,12 @@ export function NyxSlider({ className, ...props }: InputHTMLAttributes<HTMLInput
   );
 }
 
-export function NyxToggle({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+export function UiToggle({ className, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
     <button
       className={cx(
-        "rounded-full bg-[#eef1f6] px-3 py-1.5 text-xs text-[#4a5165]",
-        "transition hover:bg-[#dfe3e9]",
+        "rounded-full bg-transparent px-3 py-1.5 text-xs",
+        "transition",
         className,
       )}
       {...props}

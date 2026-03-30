@@ -1,7 +1,8 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { APP_ROUTES } from "@/lib/routes";
 
-const PUBLIC_PATHS = ["/login", "/auth/callback"];
+const PUBLIC_PATHS = [APP_ROUTES.LOGIN, APP_ROUTES.AUTH_CALLBACK];
 
 function isPublicPath(pathname: string) {
   return PUBLIC_PATHS.some(
@@ -28,7 +29,7 @@ function unauthorizedResponse(request: NextRequest, pathname: string) {
   }
 
   const redirectUrl = request.nextUrl.clone();
-  redirectUrl.pathname = "/login";
+  redirectUrl.pathname = APP_ROUTES.LOGIN;
   redirectUrl.searchParams.set("next", pathname);
   return NextResponse.redirect(redirectUrl);
 }
@@ -92,5 +93,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/upload/:path*", "/api/upload/:path*", "/api/stream/:path*"],
+  matcher: ["/dashboard/:path*", "/upload/:path*", "/api/upload/:path*", "/api/stream/:path*", "/api/cover/:path*"],
 };
