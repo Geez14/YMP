@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import UploadClient from "@/components/upload-client";
+import { APP_ROUTES, buildLoginRedirect } from "@/lib/routes";
+import UploadPageClient from "@/features/upload/components/upload-page-client";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +14,7 @@ export default async function UploadPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect("/login?next=/upload");
+    redirect(buildLoginRedirect(APP_ROUTES.UPLOAD));
   }
 
   return (
@@ -42,7 +43,7 @@ export default async function UploadPage() {
           <p style={{ opacity: 0.8 }}>Upload and compress songs here, then manage them on dashboard.</p>
         </div>
         <Link
-          href="/dashboard"
+          href={APP_ROUTES.DASHBOARD}
           style={{
             border: "1px solid rgba(35, 77, 102, 0.24)",
             borderRadius: 999,
@@ -55,7 +56,7 @@ export default async function UploadPage() {
         </Link>
       </div>
 
-      <UploadClient />
+      <UploadPageClient />
     </main>
   );
 }

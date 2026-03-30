@@ -3,6 +3,7 @@
 import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { APP_ROUTES } from "@/lib/routes";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 
 import styles from "./page.module.css";
@@ -24,8 +25,8 @@ function LoginPageContent() {
   async function signInWithGoogle() {
     setError(null);
 
-    const nextPath = searchParams.get("next") || "/dashboard";
-    const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+    const nextPath = searchParams.get("next") || APP_ROUTES.DASHBOARD;
+    const redirectTo = `${window.location.origin}${APP_ROUTES.AUTH_CALLBACK}?next=${encodeURIComponent(nextPath)}`;
     const { error: signInError } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {

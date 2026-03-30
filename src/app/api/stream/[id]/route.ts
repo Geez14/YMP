@@ -7,6 +7,20 @@ import { supabaseServiceClient } from "@/lib/supabase/service";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+function mapStorageErrorStatus(errorMessage: string): 403 | 404 | 500 {
+  const normalized = errorMessage.toLowerCase();
+
+  if (normalized.includes("unauthorized") || normalized.includes("forbidden") || normalized.includes("403")) {
+    return 403;
+  }
+
+  if (normalized.includes("not found") || normalized.includes("404") || normalized.includes("no such object")) {
+    return 404;
+  }
+
+  return 500;
+}
+
 type Context = {
   params: Promise<{
     id: string;
@@ -38,7 +52,17 @@ export async function GET(_request: Request, context: Context) {
     .download(song.file_path);
 
   if (downloadResult.error || !downloadResult.data) {
-    return NextResponse.json({ error: "Unable to stream file" }, { status: 500 });
+    const status = downloadResult.error
+      ? mapStorageErrorStatus(downloadResult.error.message)
+      : 500;
+
+    const errorMessage = status === 403
+      ? "Forbidden"
+      : status === 404
+        ? "Not found"
+        : "Unable to stream file";
+
+    return NextResponse.json({ error: errorMessage }, { status });
   }
 
   const blob = downloadResult.data;

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 
+import { APP_ROUTES, buildLoginRedirect } from "@/lib/routes";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { supabaseServiceClient } from "@/lib/supabase/service";
 
@@ -8,15 +9,15 @@ export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") || "/dashboard";
-  const safeNext = next.startsWith("/") ? next : "/dashboard";
+  const next = searchParams.get("next") || APP_ROUTES.DASHBOARD;
+  const safeNext = next.startsWith("/") ? next : APP_ROUTES.DASHBOARD;
 
   if (code) {
     const supabase = await createSupabaseServerClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (error) {
       return NextResponse.redirect(
-        `${origin}/login?error=${encodeURIComponent(error.message)}&next=${encodeURIComponent(safeNext)}`,
+        `${origin}${buildLoginRedirect(safeNext, error.message)}`,
       );
     }
 
@@ -38,7 +39,7 @@ export async function GET(request: Request) {
 
       if (upsertError) {
         return NextResponse.redirect(
-          `${origin}/login?error=${encodeURIComponent(`Profile sync failed: ${upsertError.message}`)}&next=${encodeURIComponent(safeNext)}`,
+          `${origin}${buildLoginRedirect(safeNext, `Profile sync failed: ${upsertError.message}`)}`,
         );
       }
     }

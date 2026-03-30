@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
-import { ServiceWorkerRegister } from "@/components/service-worker-register";
+import { PwaRegisterServiceWorker } from "@/components/pwa/pwa-register-service-worker";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${manrope.variable} ${jakarta.variable} font-jakarta`}>
         {children}
-        <ServiceWorkerRegister />
+        <PwaRegisterServiceWorker />
         <SpeedInsights />
       </body>
     </html>
